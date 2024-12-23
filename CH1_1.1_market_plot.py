@@ -8,9 +8,7 @@ data = yf.download(
     end="2023-12-31"
 )
 
-data = data.stack().reset_index()
-
-print(data.columns)
+data = data.stack(future_stack=True).reset_index()
 
 data['Return'] = data['Close'].pct_change()
 
