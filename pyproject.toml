@@ -1,0 +1,14 @@
+[project]
+name = "investments-figures"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.10.0",
+    "numpy>=2.2.1",
+    "pandas>=2.2.3",
+    "scipy>=1.14.1",
+    "seaborn>=0.13.2",
+    "yfinance>=0.2.51",
+]
