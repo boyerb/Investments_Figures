@@ -5,7 +5,7 @@
 ### Install UV
 MacOS
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh 
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 Windows
@@ -29,13 +29,18 @@ Windows
 .venv/Scripts/activate
 ```
 
+### Install pre-commit
+``` bash
+pre-commit install
+```
+
 That's it! You are all ready to go with the project!
 
 ## Commands
 
 ### Add a Dependency
 ```bash
-uv add <package> 
+uv add <package>
 ```
 
 ## Remove a Dependency
@@ -43,3 +48,7 @@ uv add <package>
 uv remove <package>
 ```
 
+## Format Code
+```bash
+pre-commit run --all-files
+```
