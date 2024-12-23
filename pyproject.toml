@@ -10,4 +10,5 @@ dependencies = [
     "pandas>=2.2.3",
     "scipy>=1.14.1",
     "seaborn>=0.13.2",
+    "yfinance>=0.2.51",
 ]
