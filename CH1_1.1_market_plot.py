@@ -16,5 +16,5 @@ data["Investment Value"] = 1000 * data["Cummulative Return"]
 
 sns.lineplot(data, x="Date", y="Investment Value")
 
-plt.savefig("plots/CH1-1.1_market_plot.png")
+plt.savefig("plots/CH1_1.1_market_plot.png")
 plt.show()
