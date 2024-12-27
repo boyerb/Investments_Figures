@@ -5,10 +5,13 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "gdown>=5.2.0",
+    "ipykernel>=6.29.5",
     "matplotlib>=3.10.0",
     "numpy>=2.2.1",
     "pandas>=2.2.3",
     "pre-commit>=4.0.1",
+    "pyarrow>=18.1.0",
     "scipy>=1.14.1",
     "seaborn>=0.13.2",
     "yfinance>=0.2.51",
