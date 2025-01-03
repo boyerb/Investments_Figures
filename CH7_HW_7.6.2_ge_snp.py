@@ -18,6 +18,7 @@ sns.scatterplot(x=x, y=y)
 plt.xlabel("Return on S&P500")
 plt.ylabel("Return on GE")
 
-plt.savefig("plots/CH7_HW_7.6.2.png")
 plt.tight_layout()
+
+plt.savefig("plots/CH7_HW_7.6.2_ge_snp.png")
 plt.show()
