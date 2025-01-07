@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import yfinance as yf
 
-data = yf.download(tickers=["SPY"], start="2005-01-01", end="2023-12-31")
+data = yf.download(tickers=["SPY"], start="2005-01-01", end="2024-12-31")
 
 data = data.stack(future_stack=True).reset_index()
 
