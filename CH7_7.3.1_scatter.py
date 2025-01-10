@@ -3,7 +3,9 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-df = pd.read_csv("data/data_1.csv", index_col=0)
+from datasets import CH7_731
+
+df = CH7_731().df
 
 sns.scatterplot(data=df, x="Portfolio", y="stock A")
 
