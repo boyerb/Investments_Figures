@@ -20,21 +20,31 @@ plt.plot(x, y, color="black", linestyle="-", linewidth=1)
 np.random.seed(42)  # for reproducibility
 sample_points = df.sample(n=4)
 
-# Add dotted lines for residuals
-for idx, point in sample_points.iterrows():
-    x_val = point["rp"]
-    actual_y = point["rA"]
+# Add annotations and residual lines
+for x_val in [-0.1, 0.1]:
     predicted_y = slope * x_val + intercept
+    print(x_val, predicted_y)
 
-    # Draw vertical dotted line between point and regression line
+    # Draw vertical dotted line
     plt.vlines(
         x=x_val,
-        ymin=min(actual_y, predicted_y),
-        ymax=max(actual_y, predicted_y),
+        ymin=min(0, predicted_y),
+        ymax=max(0, predicted_y),
         colors="k",
         linestyles=":",
-        linewidth=0.5,
+        linewidth=1,
     )
+
+    # Draw horizontal dotten line
+    plt.hlines(
+        y=predicted_y,
+        xmin=min(0, x_val),
+        xmax=max(0, x_val),
+        colors="k",
+        linestyles=":",
+        linewidth=1,
+    )
+
 
 # Add horizontal and vertical lines at 0
 plt.axhline(y=0, color="k", linestyle="-", linewidth=0.5)

@@ -44,7 +44,7 @@ for point in points_to_annotate:
 
     # Add residual percentage annotation with box
     plt.annotate(
-        f"{residual_pct:.2f}% residual",
+        f"{residual_pct:.1f}% residual",
         xy=(x_val, (actual_y + predicted_y) / 2),
         xytext=(30, 30),
         textcoords="offset points",
@@ -55,7 +55,7 @@ for point in points_to_annotate:
 
     # Add actual_y val annotation
     plt.annotate(
-        f"{actual_y*100:.2f}%",
+        f"{actual_y*100:.1f}%",
         xy=(0, actual_y),
         xytext=(-100, -10),
         textcoords="offset points",
@@ -66,7 +66,7 @@ for point in points_to_annotate:
 
     # Add predicted_y val annotation
     plt.annotate(
-        f"{predicted_y*100:.2f}%",
+        f"{predicted_y*100:.1f}%",
         xy=(0, predicted_y),
         xytext=(-100, 10),
         textcoords="offset points",
@@ -77,7 +77,7 @@ for point in points_to_annotate:
 
     # Add predicted_y val annotation
     plt.annotate(
-        f"{x_val*100:.2f}%",
+        f"{x_val*100:.1f}%",
         xy=(x_val, 0),
         xytext=(0, -50),
         textcoords="offset points",
