@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
+import seaborn as sns
 
 # Set Seaborn style
 sns.set(style="whitegrid")
@@ -26,16 +26,31 @@ plt.plot(x_mosaic, y_mosaic, color="red", label="Mosaic CAL", linewidth=2)
 # Define the Client's Portfolio point
 client_portfolio = (0.2625, 0.14)
 plt.scatter(*client_portfolio, color="cyan", s=100, edgecolor="black", zorder=5)
-plt.text(client_portfolio[0] + 0.1, client_portfolio[1] - 0.012, "Client's Portfolio", 
-         fontsize=22, ha="center")
+plt.text(
+    client_portfolio[0] + 0.1,
+    client_portfolio[1] - 0.012,
+    "Client's Portfolio",
+    fontsize=22,
+    ha="center",
+)
 
 # Add dashed lines from Client's Portfolio
 # Horizontal dashed line
-plt.plot([(client_portfolio[1] - intercept)/vanguard_sharpe, client_portfolio[0]], [client_portfolio[1], client_portfolio[1]], 
-         linestyle="dashed", color="black", linewidth=1.5)
+plt.plot(
+    [(client_portfolio[1] - intercept) / vanguard_sharpe, client_portfolio[0]],
+    [client_portfolio[1], client_portfolio[1]],
+    linestyle="dashed",
+    color="black",
+    linewidth=1.5,
+)
 # Vertical dashed line
-plt.plot([client_portfolio[0], client_portfolio[0]], [intercept + client_portfolio[0] * vanguard_sharpe, client_portfolio[1]], 
-         linestyle="dashed", color="black", linewidth=1.5)
+plt.plot(
+    [client_portfolio[0], client_portfolio[0]],
+    [intercept + client_portfolio[0] * vanguard_sharpe, client_portfolio[1]],
+    linestyle="dashed",
+    color="black",
+    linewidth=1.5,
+)
 
 # Set axis limits and ticks
 plt.xlim(0, 0.6)
@@ -52,4 +67,3 @@ plt.legend(fontsize=22, loc="upper left")
 plt.savefig(
     "plots/CH6_6.2.5_Mosaic_Vanguard_CAL.png", dpi=300
 )  # Save with high resolution (300 dpi)
-#plt.show()

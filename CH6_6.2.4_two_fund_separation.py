@@ -1,10 +1,9 @@
 import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
+import seaborn as sns
 
 # Set style and context
 sns.set_style("white")
-# sns.set_context("talk")
 
 # Create the plot
 fig, ax = plt.subplots(figsize=(10, 8))
@@ -38,16 +37,30 @@ ax.vlines(point_A[0], 0, point_A[1], linestyles="dashed", colors="black")
 
 # Annotate points
 ax.text(point_B[0] + 0.01, point_B[1] - 0.01, "B", fontsize=22, va="center", ha="left")
-ax.text(point_P[0] + 0.01, point_P[1] - 0.03, "Asset with\nmaximum\nSharpe Ratio", fontsize=22, va="center", ha="left")
+ax.text(
+    point_P[0] + 0.01,
+    point_P[1] - 0.03,
+    "Asset with\nmaximum\nSharpe Ratio",
+    fontsize=22,
+    va="center",
+    ha="left",
+)
 ax.text(point_A[0] + 0.01, point_A[1] - 0.01, "A", fontsize=22, va="center", ha="left")
 
 # Annotate the region
-ax.text(0.03, 0.22, "Impossible to\ncreate portfolios in\nthis region.", fontsize=22, va="center", ha="left", 
-        bbox=dict(facecolor='white', edgecolor='black'))
+ax.text(
+    0.03,
+    0.22,
+    "Impossible to\ncreate portfolios in\nthis region.",
+    fontsize=22,
+    va="center",
+    ha="left",
+    bbox=dict(facecolor="white", edgecolor="black"),
+)
 
 # Set limits, labels, and ticks
 ax.set_xlim(0, 0.3)
-ax.set_ylim(0,0.3)
+ax.set_ylim(0, 0.3)
 ax.set_xlabel("$\\sigma$", fontsize=26)
 ax.set_ylabel("E[r]", fontsize=26)
 ax.set_xticks([point_B[0], point_A[0]])

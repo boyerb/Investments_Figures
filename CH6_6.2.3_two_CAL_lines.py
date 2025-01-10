@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Set Seaborn style and figure size
-sns.set(style="whitegrid")
+sns.set_theme(style="whitegrid")
 fig, ax = plt.subplots(figsize=(8, 8))
 fig.tight_layout()
 
@@ -13,7 +13,7 @@ points = {
     3: (0.25, 0.128),  # Point 3
     4: (0.0417, 0.05),  # Point 4
     5: (0.0694, 0.07),  # Point 5
-    6: (0.0694, 0.05)   # Point 6
+    6: (0.0694, 0.05),  # Point 6
 }
 
 # Draw the CAL lines with the same intercept
@@ -38,7 +38,7 @@ for p1, p2 in dashed_pairs:
 # Add points with labels
 for idx, (x, y) in points.items():
     color = "green" if idx in {1, 5} else "red" if idx in {2, 4} else "black"
-    ax.plot(x, y, 'o', color=color, markersize=10)
+    ax.plot(x, y, "o", color=color, markersize=10)
     ax.text(x - 0.008, y + 0.002, str(idx), fontsize=22, ha="center")
 
 # Add investor labels
@@ -50,7 +50,7 @@ ax.set_xlabel(r"$\sigma$", fontsize=26)
 ax.set_ylabel(r"$E[r]$", fontsize=26)
 ax.set_xlim(0, 0.4)
 ax.set_ylim(0, 0.22)
-ax.tick_params(axis='both', labelsize=22)
+ax.tick_params(axis="both", labelsize=22)
 
 # Add legend
 ax.legend(fontsize=22, loc="upper left")
@@ -60,7 +60,4 @@ ax.set_yticks([])
 # Show the plot
 plt.grid(False)
 plt.tight_layout()
-plt.savefig(
-    "plots/CH6_6.2.3_two_CAL_lines.png", dpi=300
-)  # Save with high resolution (300 dpi)
-plt.show()
+plt.savefig("plots/CH6_6.2.3_two_CAL_lines.png", dpi=300)  # Save with high resolution (300 dpi)

@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
+import seaborn as sns
 
 # Set Seaborn style
 sns.set(style="whitegrid")
@@ -22,36 +22,58 @@ levered_position = (0.27, 0.14)
 
 # Plot points with labels
 for i, (x, y, label) in enumerate(
-    [(conservative_position[0], conservative_position[1], "Conservative Position"),
-     (fund[0], fund[1], "Fund"),
-     (levered_position[0], levered_position[1], "Levered Position")], start=1):
+    [
+        (conservative_position[0], conservative_position[1], "Conservative Position"),
+        (fund[0], fund[1], "Fund"),
+        (levered_position[0], levered_position[1], "Levered Position"),
+    ],
+    start=1,
+):
     plt.scatter(x, y, color="black", s=100, zorder=5)
     plt.text(x - 0.01, y + 0.001, str(i), fontsize=20, color="black", ha="center")
     plt.text(x + 0.01, y - 0.015, label, fontsize=20, color="black")
 
 # Add arrows and labels for lending and borrowing
-plt.annotate("", xy=(0.03, 0.0582), xytext=(0.16, 0.1154),
-             arrowprops=dict(facecolor="blue", edgecolor="blue", arrowstyle="->", linewidth=2),
-             fontsize=22, color="blue", ha="center")
-
-plt.text(
-    (0.03 + 0.16) / 2, (0.0582 + 0.1154) / 2 + 0.015, 
-    'Risk Free Lending',
-    rotation=25,  # Rotate text to match arrow angle
-    rotation_mode='anchor',  # Rotate around anchor point
-    fontsize=20, ha='center', va='center'  # Center-align text
+plt.annotate(
+    "",
+    xy=(0.03, 0.0582),
+    xytext=(0.16, 0.1154),
+    arrowprops=dict(facecolor="blue", edgecolor="blue", arrowstyle="->", linewidth=2),
+    fontsize=22,
+    color="blue",
+    ha="center",
 )
 
-plt.annotate("", xy=(0.33, 0.1902), xytext=(0.20, 0.133),
-             arrowprops=dict(facecolor="blue", edgecolor="blue", arrowstyle="->", linewidth=2),
-             fontsize=22, color="blue", ha="center")
+plt.text(
+    (0.03 + 0.16) / 2,
+    (0.0582 + 0.1154) / 2 + 0.015,
+    "Risk Free Lending",
+    rotation=25,  # Rotate text to match arrow angle
+    rotation_mode="anchor",  # Rotate around anchor point
+    fontsize=20,
+    ha="center",
+    va="center",  # Center-align text
+)
+
+plt.annotate(
+    "",
+    xy=(0.33, 0.1902),
+    xytext=(0.20, 0.133),
+    arrowprops=dict(facecolor="blue", edgecolor="blue", arrowstyle="->", linewidth=2),
+    fontsize=22,
+    color="blue",
+    ha="center",
+)
 
 plt.text(
-    (0.33 + 0.20) / 2, (0.1902 + 0.133) / 2 + 0.015, 
-    'Risk Free Borrowing',
+    (0.33 + 0.20) / 2,
+    (0.1902 + 0.133) / 2 + 0.015,
+    "Risk Free Borrowing",
     rotation=25,  # Rotate text to match arrow angle
-    rotation_mode='anchor',  # Rotate around anchor point
-    fontsize=20, ha='center', va='center'  # Center-align text
+    rotation_mode="anchor",  # Rotate around anchor point
+    fontsize=20,
+    ha="center",
+    va="center",  # Center-align text
 )
 
 # Set axis limits and ticks
@@ -65,7 +87,4 @@ sns.despine()
 
 # Final adjustments and show plot
 plt.tight_layout()
-plt.savefig(
-    "plots/CH6_6.3.1_moving_along_CAL.png", dpi=300
-)  # Save with high resolution (300 dpi)
-#plt.show()
+plt.savefig("plots/CH6_6.3.1_moving_along_CAL.png", dpi=300)  # Save with high resolution (300 dpi)
