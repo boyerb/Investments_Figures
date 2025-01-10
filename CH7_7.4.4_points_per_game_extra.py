@@ -4,11 +4,13 @@ import pandas as pd
 import seaborn as sns
 from scipy import stats
 
+from datasets import PointsPerGame
+
 # Select specific points to annotate (you might need to adjust these values to match your data)
 points_to_annotate = [{"x": 17.8, "y": 0.524}, {"x": 16.2, "y": 0.305}]
 
 for i, point in enumerate(points_to_annotate):
-    df = pd.read_csv("data/data_3.csv")
+    df = PointsPerGame().df
 
     sns.scatterplot(data=df, x="AVG PPG by TOP SCORER", y="%WINS")
 

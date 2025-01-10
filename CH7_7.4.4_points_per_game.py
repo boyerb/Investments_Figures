@@ -4,7 +4,9 @@ import pandas as pd
 import seaborn as sns
 from scipy import stats
 
-df = pd.read_csv("data/data_3.csv")
+from datasets import PointsPerGame
+
+df = PointsPerGame().df
 
 sns.scatterplot(data=df, x="AVG PPG by TOP SCORER", y="%WINS")
 
