@@ -3,7 +3,9 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-df = pd.read_csv("data/data_2.csv", index_col=0)
+from datasets import Autoliv
+
+df = Autoliv().df
 
 x = df["rp"]
 y = df["rA"]

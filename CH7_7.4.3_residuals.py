@@ -4,7 +4,9 @@ import pandas as pd
 import seaborn as sns
 from scipy import stats
 
-df = pd.read_csv("data/data_2.csv", index_col=0)
+from datasets import Autoliv
+
+df = Autoliv().df
 
 plt.figure(figsize=(8, 6))
 
