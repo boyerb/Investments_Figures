@@ -2,8 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import statsmodels.api as sm
-from statsmodels.regression.rolling import RollingOLS
+import statsmodels.formula.api as smf
 
 from datasets import CRSPMonthly, FamaFrenchFactors
 
@@ -44,26 +43,34 @@ fac["mdt"] = pd.to_datetime(fac["mdt"], format="%Y%m").dt.strftime("%Y-%m")
 fac = fac[["mdt", "MKTRf"]]
 
 # Merge returns and factor dataframes
-rets = rets.merge(fac, on="mdt", how="left").dropna().reset_index(drop=True)
-rets["mdt"] = pd.to_datetime(rets["mdt"]) + pd.offsets.MonthEnd(0)
+rets = rets.merge(fac, on="mdt", how="left").dropna()
 
-# Fit the RollingOLS model
-for i in [1, 10]:
-    rets = sm.add_constant(rets)
-    model = RollingOLS(
-        endog=rets[f"port_{i}"], exog=rets[["const", "MKTRf"]], window=120  # 10 year window
-    ).fit()
+# Generate alphas dataframe
+alphas = []
+for i in range(1, 11):
+    model = smf.ols(f"port_{i} ~ MKTRf", rets).fit()
+    lower_bound = model.conf_int().loc["Intercept"][0]
+    upper_bound = model.conf_int().loc["Intercept"][1]
+    mean = model.params["Intercept"]
+    alphas.append({"port": i, "5%": lower_bound, "50%": mean, "95%": upper_bound})
 
-    rets[f"alpha_{i}"] = model.params["const"]
+alphas = pd.DataFrame(alphas)
 
-# Generate plot
-sns.lineplot(rets, x="mdt", y="alpha_1", label="Losers", color="k", linestyle="dashed")
-sns.lineplot(rets, x="mdt", y="alpha_10", label="Winners", color="k")
-
-plt.axhline(0, color="k", linestyle="dotted")
+# Create plot
+sns.lineplot(alphas, x="port", y="5%", label="5%", color="k", linestyle="dashed")
+sns.lineplot(alphas, x="port", y="50%", label="50%", color="k")
+sns.lineplot(alphas, x="port", y="95%", label="95%", color="k", linestyle="dashed")
 
 plt.ylabel("Alpha (bps)")
-plt.xlabel(None)
+plt.xlabel("Decile Portfolio")
 
-plt.savefig("plots/CH12_12.3.2_momentum.png")
+plt.xticks(range(1, 11))
+
+plt.axhline(y=0, color="k", linestyle="dotted")
+
+plt.savefig("plots/CH12_12.3.1_momentum_1.png")
 plt.show()
+
+start_date = rets["mdt"].min()
+end_date = rets["mdt"].max()
+print(f"Alpha: {start_date} - {end_date}")
