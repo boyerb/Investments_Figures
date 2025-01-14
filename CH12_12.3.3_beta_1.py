@@ -30,8 +30,6 @@ fac = fac[["mdt", "MKTRf"]]
 # Merge returns and factor dataframes
 df = df.merge(fac, on="mdt", how="left").dropna().reset_index(drop=True)
 
-from tqdm import tqdm
-
 # Calculate betas
 tqdm.pandas(desc="Calculating betas")
 window = 60
