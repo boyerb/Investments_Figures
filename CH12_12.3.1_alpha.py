@@ -61,7 +61,7 @@ sns.lineplot(alphas, x="port", y="5%", label="5%", color="k", linestyle="dashed"
 sns.lineplot(alphas, x="port", y="50%", label="50%", color="k")
 sns.lineplot(alphas, x="port", y="95%", label="95%", color="k", linestyle="dashed")
 
-plt.ylabel("Alpha")
+plt.ylabel("Alpha (bps)")
 plt.xlabel("Decile Portfolio")
 
 plt.xticks(range(1, 11))
