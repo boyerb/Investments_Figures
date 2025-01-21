@@ -30,7 +30,7 @@ class CRSPMonthly(Dataset):
 
         # Filters
         df = df.query("10 <= shrcd <= 11")  # Stocks
-        df = df.query("1 <= exchcd <= 3")  # NYSE, AMEX, NASDAQ
+        # df = df.query("1 <= exchcd <= 3")  # NYSE, AMEX, NASDAQ
 
         # Keep only necessary columns
         keep_columns = [
