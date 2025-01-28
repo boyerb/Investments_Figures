@@ -33,5 +33,6 @@ for i, ax in enumerate(axes):
 
 plt.tight_layout()
 
-plt.show()
+
 plt.savefig('plots/CH8_8.3.1.png')
+plt.show()
