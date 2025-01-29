@@ -35,5 +35,5 @@ for i, ax in enumerate(axes):
 plt.tight_layout()
 
 
-plt.savefig('plots/CH8_8.3.1.png')
+plt.savefig('plots/CH8_8.3.1.png',dpi=400)
 plt.show()

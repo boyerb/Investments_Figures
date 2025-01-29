@@ -26,5 +26,5 @@ plt.yticks([0.5, 1, 1.5, 2, 2.5])
 plt.xlabel('Outcomes')
 
 
-plt.savefig('plots/CH5_5.2_pdf.png')
+plt.savefig('plots/CH5_5.2_pdf.png',dpi=400)
 plt.show()
