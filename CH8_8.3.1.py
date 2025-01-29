@@ -20,6 +20,7 @@ for i, ax in enumerate(axes):
         ax.plot([1,3],[2,2], color='red', lw=2)
         ax.plot([x_values[i],x_values[i]],[0,2], color='black', linestyle='--',lw=1)
 
+    ax.text(3.3, -0.13, r"$W_i$", ha='center', va='center', fontsize=10)
 
     ax.set_xlabel(listy[i])
     ax.set_ylabel("Sharpe Ratio")
