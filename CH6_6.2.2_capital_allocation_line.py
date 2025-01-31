@@ -65,7 +65,6 @@ ax.annotate(
     xytext=(x_vals[1] - 0.03, y_vals[1] + 0.020),  # Near the "d" in "Fund"
     arrowprops=dict(facecolor="black", edgecolor="black", arrowstyle="->", lw=2),
 )
-
 # Save the plot
 plt.grid(False)
 plt.tight_layout()
