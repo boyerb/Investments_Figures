@@ -13,7 +13,7 @@ class AccrualPortfolios(Dataset):
         super().__init__(RAW_FILE_PATH, CLEAN_FILE_PATH)
 
     def download(self):
-        file_id = "17EZ9qHcQoegialcImiJfeyd778PZE8n_"
+        file_id = "1F1K2bQ70k9AhOUUp9Tip7n9TkJMVOVBS"
         url = f"https://drive.google.com/uc?id={file_id}"
 
         gdown.download(url, RAW_FILE_PATH, quiet=False)

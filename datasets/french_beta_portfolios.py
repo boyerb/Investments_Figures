@@ -8,11 +8,12 @@ CLEAN_FILE_PATH = DATA_DIR + "/french_beta_portfolios_clean.parquet"
 
 
 class BetaPortfolios(Dataset):
+
     def __init__(self, RAW_FILE_PATH=RAW_FILE_PATH, CLEAN_FILE_PATH=CLEAN_FILE_PATH) -> None:
         super().__init__(RAW_FILE_PATH, CLEAN_FILE_PATH)
 
     def download(self):
-        file_id = "17EZ9qHcQoegialcImiJfeyd778PZE8n_"
+        file_id = "1Wyg0ja1W8_Ue5J6OjxiACpon7PXc8Fnr"
         url = f"https://drive.google.com/uc?id={file_id}"
 
         gdown.download(url, RAW_FILE_PATH, quiet=False)

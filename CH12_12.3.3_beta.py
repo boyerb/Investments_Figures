@@ -31,16 +31,8 @@ alphas = pd.DataFrame(alphas)
 sns.lineplot(alphas, x="port", y="5%", label="5%", color="k", linestyle="dashed")
 sns.lineplot(alphas, x="port", y="50%", label="50%", color="k")
 sns.lineplot(alphas, x="port", y="95%", label="95%", color="k", linestyle="dashed")
-
 plt.ylabel("Alpha (bps)")
 plt.xlabel("Decile Portfolio")
-
 plt.xticks(range(1, 11))
-
 plt.axhline(y=0, color="k", linestyle="dotted")
-
 plt.savefig("plots/CH12_12.3.3_beta.png", dpi=300)
-
-start_date = df["mdt"].min()
-end_date = df["mdt"].max()
-print(f"Date range: {start_date} - {end_date}")

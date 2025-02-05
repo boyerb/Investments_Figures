@@ -8,9 +8,6 @@ CLEAN_FILE_PATH = DATA_DIR + "/fama_french_factors_clean.parquet"
 
 
 class FamaFrenchFactors(Dataset):
-    """
-    Factor data from Fama and French.
-    """
 
     def __init__(self, RAW_FILE_PATH=RAW_FILE_PATH, CLEAN_FILE_PATH=CLEAN_FILE_PATH) -> None:
         super().__init__(RAW_FILE_PATH, CLEAN_FILE_PATH)
