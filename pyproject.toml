@@ -14,5 +14,7 @@ dependencies = [
     "pyarrow>=18.1.0",
     "scipy>=1.14.1",
     "seaborn>=0.13.2",
+    "statsmodels>=0.14.4",
+    "tqdm>=4.67.1",
     "yfinance>=0.2.51",
 ]
