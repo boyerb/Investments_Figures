@@ -8,10 +8,6 @@ CLEAN_FILE_PATH = DATA_DIR + "/french_beta_portfolios_clean.parquet"
 
 
 class BetaPortfolios(Dataset):
-    """
-    Beta portfolios from Kenneth French data library.
-    """
-
     def __init__(self, RAW_FILE_PATH=RAW_FILE_PATH, CLEAN_FILE_PATH=CLEAN_FILE_PATH) -> None:
         super().__init__(RAW_FILE_PATH, CLEAN_FILE_PATH)
 

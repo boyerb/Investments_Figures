@@ -3,11 +3,12 @@ import pandas as pd
 
 from .dataset import DATA_DIR, Dataset
 
-RAW_FILE_PATH = DATA_DIR + "/french_momentum_portfolios_raw.csv"
-CLEAN_FILE_PATH = DATA_DIR + "/french_momentum_portfolios_clean.parquet"
+RAW_FILE_PATH = DATA_DIR + "/french_bm_portfolios_raw.csv"
+CLEAN_FILE_PATH = DATA_DIR + "/french_bm_portfolios_clean.parquet"
 
 
-class MomentumPortfolios(Dataset):
+class BookToMarketPortfolios(Dataset):
+
     def __init__(self, RAW_FILE_PATH=RAW_FILE_PATH, CLEAN_FILE_PATH=CLEAN_FILE_PATH) -> None:
         super().__init__(RAW_FILE_PATH, CLEAN_FILE_PATH)
 
@@ -20,15 +21,40 @@ class MomentumPortfolios(Dataset):
     def clean(self):
         df = pd.read_csv(RAW_FILE_PATH)
 
-        # Year-month column
+        # # Year-month column
         df["mdt"] = pd.to_datetime(df["Date"], format="%Y%m").dt.strftime("%Y-%m")
+        df = df.drop(
+            columns=[
+                "<= 0",
+                "Lo 30",
+                "Med 40",
+                "Hi 30",
+                "Date",
+                "Lo 20",
+                "Qnt 2",
+                "Qnt 3",
+                "Qnt 4",
+                "Hi 20",
+            ]
+        )
 
-        columns = ["Lo PRIOR"] + [f"PRIOR {i}" for i in range(2, 10)] + ["Hi PRIOR"]
+        columns = [
+            "Lo 10",
+            "2-Dec",
+            "3-Dec",
+            "4-Dec",
+            "5-Dec",
+            "6-Dec",
+            "7-Dec",
+            "8-Dec",
+            "9-Dec",
+            "Hi 10",
+        ]
 
         # Rename decile columns
         df = df.rename(columns={col: f"port_{i+1}" for i, col in enumerate(columns)})
 
-        # # Reorder columns
+        # Reorder columns
         df = df[["mdt"] + df.columns.to_list()[:-1]]
 
         df.to_parquet(CLEAN_FILE_PATH)
