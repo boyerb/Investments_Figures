@@ -23,4 +23,20 @@ class FamaFrenchFactors(Dataset):
 
     def clean(self):
         df = pd.read_csv(RAW_FILE_PATH)
+
+        # Year month column
+        df["mdt"] = pd.to_datetime(df["DATE"], format="%Y%m").dt.strftime("%Y-%m")
+
+        # Drop DATE column
+        df = df.drop(columns=["DATE"])
+
+        # Rename columns
+        df = df.rename(columns={col: col.replace("-", "_").lower() for col in df.columns})
+
+        # Reorder columns
+        df = df[["mdt"] + df.columns.to_list()[:-1]]
+
+        # Add mkt column
+        df["mkt"] = df["mkt_rf"] - df["rf"]
+
         df.to_parquet(CLEAN_FILE_PATH)
