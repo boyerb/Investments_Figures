@@ -1,15 +1,11 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import seaborn as sns
-import statsmodels.api as sm
 import statsmodels.formula.api as smf
-from statsmodels.regression.rolling import RollingOLS
-from tqdm import tqdm
 
 from datasets import AccrualPortfolios, FamaFrenchFactors
 
-# Pull in French Beta Portfolios
+# Pull in French Portfolios
 df = AccrualPortfolios().df
 
 # Pull in Fama French 5 Factor data
@@ -34,16 +30,8 @@ alphas = pd.DataFrame(alphas)
 sns.lineplot(alphas, x="port", y="5%", label="5%", color="k", linestyle="dashed")
 sns.lineplot(alphas, x="port", y="50%", label="50%", color="k")
 sns.lineplot(alphas, x="port", y="95%", label="95%", color="k", linestyle="dashed")
-
 plt.ylabel("Alpha (bps)")
 plt.xlabel("Decile Portfolio")
-
 plt.xticks(range(1, 11))
-
 plt.axhline(y=0, color="k", linestyle="dotted")
-
 plt.savefig("plots/CH12_12.3.5_accrual.png", dpi=300)
-
-start_date = df["mdt"].min()
-end_date = df["mdt"].max()
-print(f"Date range: {start_date} - {end_date}")

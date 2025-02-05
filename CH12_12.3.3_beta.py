@@ -1,15 +1,11 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import seaborn as sns
-import statsmodels.api as sm
 import statsmodels.formula.api as smf
-from statsmodels.regression.rolling import RollingOLS
-from tqdm import tqdm
 
 from datasets import BetaPortfolios, FamaFrenchFactors
 
-# Pull in French Beta Portfolios
+# Pull in French Portfolios
 df = BetaPortfolios().df
 
 # Pull in Fama French 5 Factor data
