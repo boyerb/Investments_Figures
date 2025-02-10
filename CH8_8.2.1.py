@@ -22,5 +22,5 @@ plt.ylabel('Expected Return')
 
 
 
-plt.savefig('plots/CH8_8.2.1.png')
+plt.savefig('plots/CH8_8.2.1.png',dpi=400)
 plt.show()
