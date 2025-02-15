@@ -6,18 +6,18 @@ from scipy.optimize import minimize
 
 # -------------------------------------------------- Inputs --------------------------------------------------
 # Tickers
-tickers = ["IBM", "COG", "AAPL"]
+tickers = ["DRLL", "BYTE", "SNAX"]
 
 # Covariance matrix
 covariance_matrix = np.array(
-    [[0.0016, -0.0003, 0.0019], [-0.0003, 0.0100, -0.0026], [0.0019, -0.0026, 0.0071]]
+    [[0.0400, -0.0200, 0.0250], [-0.0200, 0.0900, 0.0400], [0.0250, 0.0400, 0.2500]]
 )
 
 # Expected returns
-expected_returns = np.array([0.0056, 0.0279, 0.0272])
+expected_returns = np.array([0.12, 0.06, 0.08])
 
 # Risk free rate
-rf = 0.0015
+rf = 0.05
 
 
 # -------------------------------------------------- Functions --------------------------------------------------
@@ -30,22 +30,15 @@ def portfolio_volatility(weights: np.array, covariance_matrix: np.array):
 
 
 def portfolio_sharpe(
-    weights: np.array,
-    expected_returns: np.array,
-    covariance_matrix: np.array,
-    rf: float,
+    weights: np.array, expected_returns: np.array, covariance_matrix: np.array, rf: float
 ):
     port_ret = portfolio_return(weights, expected_returns)
     port_vol = portfolio_volatility(weights, covariance_matrix)
-
     return (port_ret - rf) / port_vol
 
 
 def negative_portfolio_sharpe(
-    weights: np.array,
-    expected_returns: np.array,
-    covariance_matrix: np.array,
-    rf: float,
+    weights: np.array, expected_returns: np.array, covariance_matrix: np.array, rf: float
 ):
     return -portfolio_sharpe(weights, expected_returns, covariance_matrix, rf)
 
@@ -72,10 +65,9 @@ def mve_portfolio(target_return, expected_returns, covariance_matrix):
 
 
 # Target returns
-n_points = 10
-target_returns = np.linspace(
-    -0.03, -0.03 + (10 - 1) * 0.015, n_points
-)  # start at -.03 and increment by .015 n_points times
+start = 0.5 * min(expected_returns)
+end = 2 * max(expected_returns)
+target_returns = np.linspace(start, end, num=100)
 
 # Generate MVE portfolios
 mve_portfolios = [
@@ -89,7 +81,7 @@ sharpes = [portfolio_sharpe(w, expected_returns, covariance_matrix, rf) for w in
 
 # Portfolios dataframe
 portfolios = pd.DataFrame()
-portfolios["Name"] = [f"Portfolio {x+1}" for x in range(len(mve_portfolios))]
+portfolios["Name"] = [f"Portfolio {x + 1}" for x in range(len(mve_portfolios))]
 
 # Weight columns
 for index in range(len(tickers)):
@@ -104,16 +96,21 @@ portfolios["sharpe_ratio"] = sharpes
 print("-" * 50 + " MVE Portfolios " + "-" * 50)
 print(portfolios)
 
+Er1 = np.array([0.10, 0.08, 0.09, 0.10, 0.10, 0.12, 0.09, 0.17, 0.07, 0.09])
+vol1 = np.array([0.17, 0.24, 0.66, 0.38, 0.68, 0.66, 0.42, 0.57, 0.60, 0.26])
+
 # Chart
-plt.plot(volatilities, returns, label="Efficient Frontier", marker="o", zorder=1)
+plt.plot(volatilities, returns, label="EFRS", linewidth=2, color="k", zorder=1)
+plt.scatter(vol1, Er1, s=30, color="black", zorder=2)
 plt.xlim(0)
-plt.axhline(y=0, color="k")
+# plt.axhline(y=0, color="k")
 plt.xlabel("Volatility")
 plt.ylabel("Expected Return")
-plt.title("Efficient Frontier")
+# plt.title("Efficient Frontier")
 plt.legend()
 plt.savefig("plots/CH8_8.2.4_efficient_frontier.png", dpi=300)
-
+plt.show()
+quit()
 # -------------------------------------------------- Optimal Portfoio --------------------------------------------------
 # Constraints
 constraints = {"type": "eq", "fun": lambda x: np.sum(x) - 1}  # weights sum to 1
@@ -139,6 +136,7 @@ print("-" * 50 + " Optimal Portfolio " + "-" * 50)
 print(", ".join([f"{ticker}: {weight:.4f}" for ticker, weight in zip(tickers, optimal_weights)]))
 print(f"Sharpe: {optimal_sharpe:.4f}")
 
+
 # -------------------------------------------------- Capital Allocation Line --------------------------------------------------
 
 
@@ -146,41 +144,44 @@ def cal(x: float, sharpe: float, rf: float) -> float:
     return x * sharpe + rf
 
 
-x = 0, max(portfolios["volatility"])
+x = 0, max(portfolios["volatility"]) * 2 / 3
 y = [cal(x_, optimal_sharpe, rf) for x_ in x]
 
-plt.plot(x, y, label="Capital Allocation Line", zorder=2)
+plt.plot(x, y, label="Efficient Frontier", linewidth=2, zorder=3)
 plt.scatter(
     optimal_volatility,
     optimal_return,
     color="r",
     marker="*",
     s=200,
-    label="Optimal Portfolio",
+    label="Tangent Portfolio",
     zorder=3,
 )
-plt.legend()
+plt.legend(loc="upper left")
 plt.savefig("plots/CH8_8.2.5_efficient_frontier.png", dpi=300)
+# plt.show()
 
 # -------------------------------------------------- Client Portfolio --------------------------------------------------
-client_target_return = 0.03
-scale = (client_target_return - rf) / (optimal_return - rf)
-client_weights = optimal_weights * scale
-rf_weight = 1 - sum(client_weights)
-client_return = portfolio_return(client_weights, expected_returns) + rf * rf_weight
-client_volatility = portfolio_volatility(client_weights, covariance_matrix)
+client_target_return = 0.15
+client_weight_tangent = (client_target_return - rf) / (optimal_return - rf)
+client_volatility = client_weight_tangent * optimal_volatility
+
 
 plt.scatter(
     client_volatility,
     client_target_return,
     label="Client Portfolio",
     color="green",
-    s=100,
+    marker="*",
+    s=200,
     zorder=3,
 )
 plt.legend()
 plt.savefig("plots/CH8_8.2.6_efficient_frontier.png", dpi=300)
-
+plt.show()
+print(client_volatility)
+print(client_weight_tangent)
+quit()
 # -------------------------------------------------- Hedge Fund Portfolio --------------------------------------------------
 z = stats.norm.ppf(0.95)
 fund_var = -0.10
