@@ -9,16 +9,19 @@ listy=['Panel A','Panel B','Panel C']
 x_values=[1.4,2.2,2]
 
 for i, ax in enumerate(axes):
-    ax.plot(x, y, color='black')
+    ax.plot(x, y, color='black',lw=2)
     if i == 0:
+        ax.plot([x_values[i],x_values[i]],[0,1.28], color='black', linestyle=(0,(5,5)),lw=1)
         ax.plot([1, 1.8], [0.32, 2.24], color='red', lw=2)
-        ax.plot([x_values[i],x_values[i]],[0,1.28], color='black', linestyle='--',lw=1)
+
     elif i == 1:
+        ax.plot([x_values[i],x_values[i]],[0,1.92], color='black', linestyle=(0, (5, 5)),lw=1)
         ax.plot([1.498, 2.925], [2.4816,1.34], color='red', lw=2)
-        ax.plot([x_values[i],x_values[i]],[0,1.92], color='black', linestyle='--',lw=1)
+
     elif i == 2:
+        ax.plot([x_values[i],x_values[i]],[0,2], color='black', linestyle=(0, (5, 5)),lw=1)
         ax.plot([1,3],[2,2], color='red', lw=2)
-        ax.plot([x_values[i],x_values[i]],[0,2], color='black', linestyle='--',lw=1)
+
 
     ax.text(3.3, -0.13, r"$W_i$", ha='center', va='center', fontsize=10)
 

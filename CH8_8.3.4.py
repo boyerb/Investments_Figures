@@ -30,5 +30,6 @@ plt.xlim(0,8)
 plt.ylim(1,10)
 asdf.set_aspect('equal')
 
+plt.tight_layout()
 plt.savefig('plots/CH8_8.3.4.png',dpi=400)
 plt.show()
