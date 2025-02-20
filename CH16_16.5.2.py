@@ -12,7 +12,7 @@ plt.plot([13.88063,13.88063],[funky[0](13.88063),funky[2](13.88063)],color='blac
 
 plt.plot(x[0],[funky[0](x) for x in x[0]],color='black',lw=2)
 plt.plot(x[1],[funky[1](x) for x in x[1]],color='black',lw=2)
-plt.plot(x[2],[funky[2](x) for x in x[2]],color='black',lw=2,linestyle=(0,(3,3)))
+plt.plot(x[2],[funky[2](x) for x in x[2]],color='black',lw=2,linestyle=(0,(4,4)))
 
 yeet.spines['right'].set_visible(False)
 yeet.spines['top'].set_visible(False)
