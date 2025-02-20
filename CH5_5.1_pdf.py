@@ -8,5 +8,6 @@ plt.ylim(0,0.8)
 plt.xlabel('Outcomes')
 plt.ylabel('Probability')
 
+plt.tight_layout()
 plt.savefig('plots/CH5_5.1_pdf.png',dpi=400)
 plt.show()

@@ -8,7 +8,7 @@ x_altered=[2*x[i]+0.6 for i in range(len(x))]
 y = skewnorm.pdf(x_altered, 5)
 y_scaled = y / y.max() * 1.4
 
-plt.plot(x,y_scaled)
+plt.plot(x,y_scaled,lw=2.2)
 
 ax = plt.gca()
 ax.spines['left'].set_position(('data', 0))
@@ -25,5 +25,6 @@ plt.yticks([0.2,0.4,0.6,0.8,1,1.2,1.4,1.6])
 plt.xlabel('Outcomes')
 plt.ylim(bottom=0)
 
+plt.tight_layout()
 plt.savefig('plots/CH5_5.3_pdf.png',dpi=400)
 plt.show()

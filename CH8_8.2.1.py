@@ -21,6 +21,6 @@ plt.ylabel('Expected Return')
 
 
 
-
+plt.tight_layout()
 plt.savefig('plots/CH8_8.2.1.png',dpi=400)
 plt.show()
