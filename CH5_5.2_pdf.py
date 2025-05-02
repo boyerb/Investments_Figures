@@ -5,7 +5,7 @@ import numpy as np
 x=np.linspace(-1,1,1000)
 y = norm.pdf(x, 0.08, 0.2)
 
-plt.plot(x,y)
+plt.plot(x,y,lw=2.2)
 
 plt.ylim(0,2.5)
 plt.fill_between(x,y,where=(x>0.5),color='grey')
@@ -25,6 +25,6 @@ plt.xlim(-1,1)
 plt.yticks([0.5, 1, 1.5, 2, 2.5])
 plt.xlabel('Outcomes')
 
-
+plt.tight_layout()
 plt.savefig('plots/CH5_5.2_pdf.png',dpi=400)
 plt.show()
