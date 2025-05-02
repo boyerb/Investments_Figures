@@ -111,7 +111,7 @@ plt.legend()
 plt.savefig("plots/CH8_8.2.4_efficient_frontier.png", dpi=300)
 plt.show()
 quit()
-# -------------------------------------------------- Optimal Portfoio --------------------------------------------------
+# -------------------------------------------------- Optimal Portfolio --------------------------------------------------
 # Constraints
 constraints = {"type": "eq", "fun": lambda x: np.sum(x) - 1}  # weights sum to 1
 
