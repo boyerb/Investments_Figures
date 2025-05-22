@@ -2,8 +2,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
+# plt.rcParams["text.usetex"] = True
+
 # Lakers' leading scorer PPG and team win percentage from 1980 to present
 ppg = [
+    30.0,
+    27.7,
+    26.2,
+    25.8,
+    23.8,
+    24.8,
     26.2,
     23.9,
     21.8,
@@ -16,7 +24,7 @@ ppg = [
     22.3,
     19.4,
     19.9,
-    19.9,
+    15.1,
     14.2,
     21.7,
     21.2,
@@ -27,7 +35,7 @@ ppg = [
     28.7,
     27.2,
     30.0,
-    21.5,
+    24.0,
     27.6,
     35.4,
     31.6,
@@ -37,17 +45,27 @@ ppg = [
     25.3,
     27.9,
     27.3,
-    17.9,
-    22.3,
+    17.4,
+    12.0,
     17.6,
-    18.6,
+    15.6,
     16.1,
     27.4,
-    25.9,
     26.1,
+    25.0,
+    30.3,
+    28.9,
+    25.7,
+    24.4,
 ]
 
 win_percentage = [
+    36.6,
+    48.8,
+    64.6,
+    54.9,
+    57.3,
+    73.2,
     65.9,
     69.5,
     70.7,
@@ -88,11 +106,15 @@ win_percentage = [
     42.7,
     45.1,
     73.2,
-    67.1,
+    58.3,
+    40.2,
+    52.4,
+    57.3,
+    61.5,
 ]
 
 # Convert win percentage to decimal
-win_percentage = [w / 100 for w in win_percentage]
+# win_percentage = [w / 100 for w in win_percentage]
 
 # Create scatter plot with line of best fit
 plt.figure(figsize=(10, 6))
@@ -106,9 +128,20 @@ sns.regplot(
 
 # Labels and title
 plt.xlabel("Leading Scorer's PPG", fontsize=18)
-plt.ylabel("Win Percentage", fontsize=18)
+plt.ylabel("Win Percentage (%)", fontsize=18)
 # plt.title("Los Angeles Lakers: PPG vs. Win Percentage (1980-Present)", fontsize=16)
 plt.tick_params(axis="both", which="major", labelsize=18)
+
+# Add text box with regression coefficients
+textstr = "a = 34.89\nb =  1.02"
+plt.text(
+    30,
+    25,
+    textstr,
+    fontsize=16,
+    family="monospace",
+    bbox=dict(facecolor="white", edgecolor="black", boxstyle="round,pad=0.5"),
+)
 
 # Display the plot
 plt.savefig("plots/CH7_7.0.0_lakers_ppg_vs_win_percentage.png", dpi=300)

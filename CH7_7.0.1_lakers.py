@@ -4,6 +4,12 @@ import seaborn as sns
 
 # Lakers' leading scorer PPG and team win percentage from 1980 to present
 ppg = [
+    30.0,
+    27.7,
+    26.2,
+    25.8,
+    23.8,
+    24.8,
     26.2,
     23.9,
     21.8,
@@ -16,7 +22,7 @@ ppg = [
     22.3,
     19.4,
     19.9,
-    19.9,
+    15.1,
     14.2,
     21.7,
     21.2,
@@ -27,7 +33,7 @@ ppg = [
     28.7,
     27.2,
     30.0,
-    21.5,
+    24.0,
     27.6,
     35.4,
     31.6,
@@ -37,17 +43,27 @@ ppg = [
     25.3,
     27.9,
     27.3,
-    17.9,
-    22.3,
+    17.4,
+    12.0,
     17.6,
-    18.6,
+    15.6,
     16.1,
     27.4,
-    25.9,
     26.1,
+    25.0,
+    30.3,
+    28.9,
+    25.7,
+    24.4,
 ]
 
 win_percentage = [
+    36.6,
+    48.8,
+    64.6,
+    54.9,
+    57.3,
+    73.2,
     65.9,
     69.5,
     70.7,
@@ -88,11 +104,15 @@ win_percentage = [
     42.7,
     45.1,
     73.2,
-    67.1,
+    58.3,
+    40.2,
+    52.4,
+    57.3,
+    61.5,
 ]
 
 # Convert win percentage to decimal
-win_percentage = [w / 100 for w in win_percentage]
+# win_percentage = [w / 100 for w in win_percentage]
 
 # Remove the (29.7, 81.7) point before plotting
 filtered_ppg = [x for x, y in zip(ppg, win_percentage) if x != 29.7 or y != 81.7 / 100]
@@ -118,9 +138,7 @@ ax = sns.regplot(
 plt.plot(x_vals, y_vals, color="black", lw=3.0)
 
 # Highlight (29.7, 81.7) with a star (no black dot behind it)
-plt.scatter(
-    29.7, 81.7 / 100, color="black", s=400, marker="*", label="1999-2000 Season\n x=29.7, y=81.7"
-)
+plt.scatter(29.7, 81.7, color="black", s=400, marker="*", label="1999-2000 Season\n x=29.7, y=81.7")
 
 # Calculate expected win percentage at PPG = 29.7
 expected_win_pct = slope * 29.7 + intercept
@@ -141,25 +159,25 @@ plt.plot([29.7, 29.7], [expected_win_pct, 81.7 / 100], linestyle="dashed", color
 # Add curly brace for residual
 plt.text(
     32,
-    0.735,
-    "Residual\n z=0.139",
+    73.5,
+    "Residual\n z=16.5",
     fontsize=14,
     color="black",
     bbox=dict(facecolor="white", edgecolor="none", boxstyle="round,pad=0.3"),
 )
-plt.text(30.3, 0.698, r"}", fontsize=64, color="black", fontname="Calibri", fontweight="light")
-plt.text(3.7, 0.56, "E[y|x=29.7]=67.83%", fontsize=16, color="black", rotation=0)
-plt.text(23, 0.07, "x=29.7", fontsize=16, color="black", rotation=0)
+plt.text(30.3, 67.8, r"}", fontsize=79, color="black", fontname="Calibri", fontweight="light")
+plt.text(3.7, 54, "E[y|x=29.7]=65.19%", fontsize=16, color="black", rotation=0)
+plt.text(23, 7, "x=29.7", fontsize=16, color="black", rotation=0)
 plt.annotate(
     "",
-    xy=(0.1, 0.67),
-    xytext=(3.5, 0.59),
+    xy=(0.1, 65),
+    xytext=(3.5, 55),
     arrowprops=dict(facecolor="black", edgecolor="black", arrowstyle="->", lw=2, mutation_scale=20),
 )
 plt.annotate(
     "",
-    xy=(29.6, 0.005),
-    xytext=(27, 0.06),
+    xy=(29.6, 0.5),
+    xytext=(27, 6),
     arrowprops=dict(facecolor="black", edgecolor="black", arrowstyle="->", lw=2, mutation_scale=20),
 )
 
