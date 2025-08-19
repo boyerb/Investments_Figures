@@ -5,6 +5,8 @@ from datasets.crsp_monthly import CRSPMonthly
 
 df = CRSPMonthly().df
 
+print(df)
+
 df["mkt_cap"] = df["shrout"] * df["prc"]
 
 aggregate = df.groupby("date").agg({"mkt_cap": "sum", "permno": "count"}).reset_index()
